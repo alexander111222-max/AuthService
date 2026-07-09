@@ -23,7 +23,7 @@
 
 ## Схема базы данных
 
-![Database Schema](db_schema.png)
+![Database Schema](db_schema.jpg)
 
 ## Архитектура проекта
 
