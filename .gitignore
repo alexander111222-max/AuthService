@@ -1,0 +1,9 @@
+
+/shelf/
+/workspace.xml
+.idea/
+.env-local
+.env-test
+__pycache__/
+*.pyc
+

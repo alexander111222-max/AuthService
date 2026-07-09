@@ -1,0 +1,44 @@
+services:
+  auth_back:
+    container_name: "auth_back"
+    build:
+      context: .
+
+    volumes:
+      - .:/app
+
+    ports:
+      - "7777:8000"
+
+    networks:
+      - myNetwork
+
+    env_file:
+      - .env-local
+
+    depends_on:
+      - auth_db
+
+    command: sh -c "alembic upgrade head && uvicorn src.main:app --reload --host 0.0.0.0 --port 8000"
+
+  auth_db:
+    container_name: "auth_db"
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: auth
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_conversation_data:/var/lib/postgresql/data
+    networks:
+      - myNetwork
+
+
+networks:
+  myNetwork:
+    external: true
+
+volumes:
+  pg_conversation_data:
